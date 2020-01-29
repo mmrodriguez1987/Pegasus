@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="AUTOLATINO.Autolatino.sa 1"
+  DTS:DTSID="{886050B8-6EB5-42D3-B179-3D2E9C52DB80}"
+  DTS:CreationName="ADO.NET:System.Data.OleDb.OleDbConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=AUTOLATINO;User ID=sa;Initial Catalog=Autolatino;Provider=SQLNCLI11.1;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA36PwwCKr7E6e4yR8ScTABQAAAAACAAAAAAAQZgAAAAEAACAAAAAfQW8NjBJqA5w+vlLy02N1+nN6P77cRFG3TH4tORu60AAAAAAOgAAAAAIAACAAAAApicWt0c75fDu+V6OHMBvxBOB/okqp/z0c0YyvG/vGLoAAAADG5+9IDFswpLHeB8wOweaXyE3IuNMcXwIIcMkTbGnb+E2ICq2ADWIfk4peeI4yy5lM369x6BKmRN44EQi5N3odTjRRRSdVdNhL1ORe87OS/pMyRHe6KmhrDAG4kjUks1d7aWNWqSIHziWeOvh1igdg+HJTmmh7j56GtMvce1xQlkAAAADgRDnqFUPG+H8EIyc+4fOBl5Xzv9MAw6inSKKERPUfcioyRWXEKw21UAmheV/SnynZkwavhAT0r1VLZLhXKuvP</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

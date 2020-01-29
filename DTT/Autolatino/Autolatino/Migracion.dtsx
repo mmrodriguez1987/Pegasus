@@ -1,0 +1,1807 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable
+  DTS:refId="Package" xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:CreatorName="Autolatino\Analista"
+  DTS:CreatorComputerName="AUTOLATINO"
+  DTS:CreationDate="12/2/2014 9:49:43 AM"
+  DTS:PackageType="5"
+  DTS:VersionBuild="55"
+  DTS:VersionGUID="{390FF573-2E6D-439E-9189-AD2B23C8107E}"
+  DTS:LastModifiedProductVersion="11.0.2100.60"
+  DTS:LocaleID="3082"
+  DTS:ObjectName="Migracion"
+  DTS:DTSID="{1D92159E-AE9B-4F81-AE28-213A1EF9CA69}"
+  DTS:CreationName="SSIS.Package.3">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SERVER.USA.sa]"
+      DTS:ObjectName="SERVER.USA.sa"
+      DTS:DTSID="{78240863-05BC-433B-8B4F-047F8F7E7D38}"
+      DTS:CreationName="OLEDB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SERVER;Initial Catalog=USA;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Migracion-{78240863-05BC-433B-8B4F-047F8F7E7D38}SERVER.USA.sa;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[xxx]"
+      DTS:ObjectName="xxx"
+      DTS:DTSID="{7F96BC32-3175-4883-B0E0-D6FA4F5A492D}"
+      DTS:CreationName="FLATFILE">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::varFileName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="3082"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Columna 0"
+              DTS:DTSID="{90F0C336-D2B1-4CA3-A709-9C62833FA33C}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:EvaluateAsExpression="True"
+      DTS:Namespace="User"
+      DTS:IncludeInDebugDump="2345"
+      DTS:ObjectName="varFileName"
+      DTS:DTSID="{F887B07C-0B62-4090-85EF-EF92298F433C}"
+      DTS:CreationName="">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Limpiar tabla temporal"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:ThreadHint="0"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Limpiar tabla temporal"
+      DTS:DTSID="{E747B844-D89E-49A2-B96C-680813C4148B}"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{78240863-05BC-433B-8B4F-047F8F7E7D38}"
+          SQLTask:SqlStatementSource="truncate table tmp" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Quitar Duplicados en BDD"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:Disabled="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Quitar Duplicados en BDD"
+      DTS:DTSID="{57B6914B-FDFE-4207-9C6A-19E1843D7A29}"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:CreationName="SSIS.Pipeline.3">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone"
+              name="Escribiendo en tblPhone"
+              componentClassID="{F452EAF3-5EF0-43F1-8067-09DDF0BC6316}"
+              description="Destino de SQL Server"
+              version="5"
+              contactInfo="Destino de SQL Server;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;5">
+              <properties>
+                <property
+                  name="DefaultCodePage"
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos.">1252</property>
+                <property
+                  name="AlwaysUseDefaultCodePage"
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir caracteres.">false</property>
+                <property
+                  name="BulkInsertTableName"
+                  dataType="System.String"
+                  description="El nombre del objeto de base de datos en el que copiar datos."
+                  expressionType="Notify">[dbo].[tblPhone]</property>
+                <property
+                  name="BulkInsertCheckConstraints"
+                  dataType="System.Boolean"
+                  description="Especifica que todas las restricciones del objeto de destino se comprueben durante la operación de copia de datos. Corresponde a la opción CHECK_CONSTRAINTS de inserción masiva.">true</property>
+                <property
+                  name="BulkInsertFirstRow"
+                  dataType="System.Int32"
+                  description="Especifica el número de la primera fila para copiar. Corresponde a la opción FIRSTROW de inserción masiva."
+                  expressionType="Notify">-1</property>
+                <property
+                  name="BulkInsertFireTriggers"
+                  dataType="System.Boolean"
+                  description="Especifica que todos los desencadenadores de inserción definidos en el objeto de destino se van a ejecutar durante la copia de datos. Corresponde a la opción FIRE_TRIGGERS de inserción masiva.">false</property>
+                <property
+                  name="BulkInsertKeepIdentity"
+                  dataType="System.Boolean"
+                  description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Corresponde a la opción KEEPIDENTITY de inserción masiva.">false</property>
+                <property
+                  name="BulkInsertKeepNulls"
+                  dataType="System.Boolean"
+                  description="Indica si las columnas que contienen NULL tendrán NULL copiado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Sólo se aplica si está activada la carga rápida.">false</property>
+                <property
+                  name="BulkInsertLastRow"
+                  dataType="System.Int32"
+                  description="Especifica el número de la última fila para copiar. Corresponde a la opción LASTROW de inserción masiva."
+                  expressionType="Notify">-1</property>
+                <property
+                  name="BulkInsertMaxErrors"
+                  dataType="System.Int32"
+                  description="Especifica el número máximo de errores de sintaxis y de compilación que pueden producirse sin que se cancele la operación de copia. Cada fila que no se puede copiar se omite y se cuenta como un error. Corresponde a la opción MAXERRORS de inserción masiva.">-1</property>
+                <property
+                  name="BulkInsertOrder"
+                  dataType="System.String"
+                  description="Especifica cómo se ordenan los datos que se van a copiar. Corresponde a la opción ORDER de inserción masiva."
+                  expressionType="Notify"></property>
+                <property
+                  name="BulkInsertTablock"
+                  dataType="System.Boolean"
+                  description="Especifica que se adquiere un bloqueo de nivel de tabla durante toda la operación de copia de datos. Corresponde a la opción TABLOCK de inserción masiva.">true</property>
+                <property
+                  name="Timeout"
+                  dataType="System.Int32"
+                  description="Especifica en segundos el tiempo de espera del adaptador de destino de SQL antes de desactivarse si no hay ningún dato disponible para la inserción. Un valor 0 de tiempo de espera indica que no se agotará el tiempo de espera del adaptador de destino de SQL."
+                  expressionType="Notify">30</property>
+                <property
+                  name="MaxInsertCommitSize"
+                  dataType="System.Int32"
+                  description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos.">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone.Connections[OleDbConnection]"
+                  name="OleDbConnection"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  connectionManagerID="Package.ConnectionManagers[SERVER.USA.sa]"
+                  connectionManagerRefId="Package.ConnectionManagers[SERVER.USA.sa]" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone.Inputs[Entrada de destino de SQL Server]"
+                  name="Entrada de destino de SQL Server"
+                  hasSideEffects="true">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone.Inputs[Entrada de destino de SQL Server].Columns[nNumero]"
+                      lineageId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados.Outputs[Salida de ordenación].Columns[nNumero]"
+                      externalMetadataColumnId="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone.Inputs[Entrada de destino de SQL Server].ExternalColumns[nNumero]"
+                      cachedName="nNumero"
+                      cachedDataType="i8"
+                      cachedSortKeyPosition="1" />
+                    <inputColumn
+                      refId="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone.Inputs[Entrada de destino de SQL Server].Columns[cFormula]"
+                      lineageId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados.Outputs[Salida de ordenación].Columns[cFormula]"
+                      externalMetadataColumnId="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone.Inputs[Entrada de destino de SQL Server].ExternalColumns[cFormula]"
+                      cachedName="cFormula"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedCodepage="1252" />
+                    <inputColumn
+                      refId="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone.Inputs[Entrada de destino de SQL Server].Columns[nArea]"
+                      lineageId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados.Outputs[Salida de ordenación].Columns[nArea]"
+                      externalMetadataColumnId="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone.Inputs[Entrada de destino de SQL Server].ExternalColumns[nArea]"
+                      cachedName="nArea"
+                      cachedDataType="i4" />
+                    <inputColumn
+                      refId="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone.Inputs[Entrada de destino de SQL Server].Columns[nPrefijo]"
+                      lineageId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados.Outputs[Salida de ordenación].Columns[nPrefijo]"
+                      externalMetadataColumnId="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone.Inputs[Entrada de destino de SQL Server].ExternalColumns[nPrefijo]"
+                      cachedName="nPrefijo"
+                      cachedDataType="i4" />
+                    <inputColumn
+                      refId="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone.Inputs[Entrada de destino de SQL Server].Columns[nSerie]"
+                      lineageId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados.Outputs[Salida de ordenación].Columns[nSerie]"
+                      externalMetadataColumnId="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone.Inputs[Entrada de destino de SQL Server].ExternalColumns[nSerie]"
+                      cachedName="nSerie"
+                      cachedDataType="i8" />
+                    <inputColumn
+                      refId="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone.Inputs[Entrada de destino de SQL Server].Columns[cDomain]"
+                      lineageId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados.Outputs[Salida de ordenación].Columns[cDomain]"
+                      externalMetadataColumnId="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone.Inputs[Entrada de destino de SQL Server].ExternalColumns[cDomain]"
+                      cachedName="cDomain"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedCodepage="1252" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone.Inputs[Entrada de destino de SQL Server].ExternalColumns[nNumero]"
+                      name="nNumero"
+                      dataType="i8" />
+                    <externalMetadataColumn
+                      refId="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone.Inputs[Entrada de destino de SQL Server].ExternalColumns[cFormula]"
+                      name="cFormula"
+                      dataType="str"
+                      length="100"
+                      codePage="1252" />
+                    <externalMetadataColumn
+                      refId="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone.Inputs[Entrada de destino de SQL Server].ExternalColumns[nArea]"
+                      name="nArea"
+                      dataType="i4" />
+                    <externalMetadataColumn
+                      refId="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone.Inputs[Entrada de destino de SQL Server].ExternalColumns[nPrefijo]"
+                      name="nPrefijo"
+                      dataType="i4" />
+                    <externalMetadataColumn
+                      refId="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone.Inputs[Entrada de destino de SQL Server].ExternalColumns[nSerie]"
+                      name="nSerie"
+                      dataType="i8" />
+                    <externalMetadataColumn
+                      refId="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone.Inputs[Entrada de destino de SQL Server].ExternalColumns[cDomain]"
+                      name="cDomain"
+                      dataType="str"
+                      length="50"
+                      codePage="1252" />
+                    <externalMetadataColumn
+                      refId="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone.Inputs[Entrada de destino de SQL Server].ExternalColumns[cUsrCre]"
+                      name="cUsrCre"
+                      dataType="str"
+                      length="50"
+                      codePage="1252" />
+                    <externalMetadataColumn
+                      refId="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone.Inputs[Entrada de destino de SQL Server].ExternalColumns[cUsrMod]"
+                      name="cUsrMod"
+                      dataType="str"
+                      length="50"
+                      codePage="1252" />
+                    <externalMetadataColumn
+                      refId="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone.Inputs[Entrada de destino de SQL Server].ExternalColumns[fFecCre]"
+                      name="fFecCre"
+                      dataType="dbTimeStamp" />
+                    <externalMetadataColumn
+                      refId="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone.Inputs[Entrada de destino de SQL Server].ExternalColumns[fFecMod]"
+                      name="fFecMod"
+                      dataType="dbTimeStamp" />
+                    <externalMetadataColumn
+                      refId="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone.Inputs[Entrada de destino de SQL Server].ExternalColumns[nState]"
+                      name="nState"
+                      dataType="i4" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Quitar Duplicados en BDD\Leyendo tmp"
+              name="Leyendo tmp"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              description="Origen de OLE DB"
+              usesDispositions="true"
+              version="7"
+              contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7">
+              <properties>
+                <property
+                  name="CommandTimeout"
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito.">0</property>
+                <property
+                  name="OpenRowset"
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas.">[dbo].[tmp]</property>
+                <property
+                  name="OpenRowsetVariable"
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."></property>
+                <property
+                  name="SqlCommand"
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  name="SqlCommandVariable"
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."></property>
+                <property
+                  name="DefaultCodePage"
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos.">1252</property>
+                <property
+                  name="AlwaysUseDefaultCodePage"
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir caracteres.">false</property>
+                <property
+                  name="AccessMode"
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  typeConverter="AccessMode">0</property>
+                <property
+                  name="ParameterMapping"
+                  dataType="System.String"
+                  description="Asignaciones entre los parámetros del comando SQL y las variables."></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Quitar Duplicados en BDD\Leyendo tmp.Connections[OleDbConnection]"
+                  name="OleDbConnection"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  connectionManagerID="Package.ConnectionManagers[SERVER.USA.sa]"
+                  connectionManagerRefId="Package.ConnectionManagers[SERVER.USA.sa]" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB]"
+                  name="Salida de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].Columns[nNumero]"
+                      name="nNumero"
+                      lineageId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].Columns[nNumero]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].ExternalColumns[nNumero]" />
+                    <outputColumn
+                      refId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].Columns[cFormula]"
+                      name="cFormula"
+                      lineageId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].Columns[cFormula]"
+                      length="500"
+                      dataType="str"
+                      codePage="1252"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].ExternalColumns[cFormula]" />
+                    <outputColumn
+                      refId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].Columns[nArea]"
+                      name="nArea"
+                      lineageId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].Columns[nArea]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].ExternalColumns[nArea]" />
+                    <outputColumn
+                      refId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].Columns[nPrefijo]"
+                      name="nPrefijo"
+                      lineageId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].Columns[nPrefijo]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].ExternalColumns[nPrefijo]" />
+                    <outputColumn
+                      refId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].Columns[nSerie]"
+                      name="nSerie"
+                      lineageId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].Columns[nSerie]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].ExternalColumns[nSerie]" />
+                    <outputColumn
+                      refId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].Columns[cDomain]"
+                      name="cDomain"
+                      lineageId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].Columns[cDomain]"
+                      length="500"
+                      dataType="str"
+                      codePage="1252"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].ExternalColumns[cDomain]" />
+                    <outputColumn
+                      refId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].Columns[id]"
+                      name="id"
+                      lineageId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].Columns[id]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      truncationRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].ExternalColumns[id]" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].ExternalColumns[nNumero]"
+                      name="nNumero"
+                      dataType="i8" />
+                    <externalMetadataColumn
+                      refId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].ExternalColumns[cFormula]"
+                      name="cFormula"
+                      dataType="str"
+                      length="100"
+                      codePage="1252" />
+                    <externalMetadataColumn
+                      refId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].ExternalColumns[nArea]"
+                      name="nArea"
+                      dataType="i4" />
+                    <externalMetadataColumn
+                      refId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].ExternalColumns[nPrefijo]"
+                      name="nPrefijo"
+                      dataType="i4" />
+                    <externalMetadataColumn
+                      refId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].ExternalColumns[nSerie]"
+                      name="nSerie"
+                      dataType="i8" />
+                    <externalMetadataColumn
+                      refId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].ExternalColumns[cDomain]"
+                      name="cDomain"
+                      dataType="str"
+                      length="50"
+                      codePage="1252" />
+                    <externalMetadataColumn
+                      refId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].ExternalColumns[id]"
+                      name="id"
+                      dataType="i8" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de error de origen de OLE DB]"
+                  name="Salida de error de origen de OLE DB"
+                  isErrorOut="true">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de error de origen de OLE DB].Columns[id]"
+                      name="id"
+                      lineageId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de error de origen de OLE DB].Columns[id]"
+                      dataType="i8" />
+                    <outputColumn
+                      refId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de error de origen de OLE DB].Columns[nNumero]"
+                      name="nNumero"
+                      lineageId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de error de origen de OLE DB].Columns[nNumero]"
+                      dataType="i8" />
+                    <outputColumn
+                      refId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de error de origen de OLE DB].Columns[cFormula]"
+                      name="cFormula"
+                      lineageId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de error de origen de OLE DB].Columns[cFormula]"
+                      length="100"
+                      dataType="str"
+                      codePage="1252" />
+                    <outputColumn
+                      refId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de error de origen de OLE DB].Columns[nArea]"
+                      name="nArea"
+                      lineageId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de error de origen de OLE DB].Columns[nArea]"
+                      dataType="i4" />
+                    <outputColumn
+                      refId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de error de origen de OLE DB].Columns[nPrefijo]"
+                      name="nPrefijo"
+                      lineageId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de error de origen de OLE DB].Columns[nPrefijo]"
+                      dataType="i4" />
+                    <outputColumn
+                      refId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de error de origen de OLE DB].Columns[nSerie]"
+                      name="nSerie"
+                      lineageId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de error de origen de OLE DB].Columns[nSerie]"
+                      dataType="i8" />
+                    <outputColumn
+                      refId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de error de origen de OLE DB].Columns[cDomain]"
+                      name="cDomain"
+                      lineageId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de error de origen de OLE DB].Columns[cDomain]"
+                      length="50"
+                      dataType="str"
+                      codePage="1252" />
+                    <outputColumn
+                      refId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      lineageId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      lineageId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados"
+              name="Ordenando y quitando duplicados"
+              componentClassID="{5B1A3FF5-D366-4D75-AD1F-F19A36FCBEDB}"
+              description="Ordena los datos de entrada de manera ascendente o descendente cuando no es posible ordenarlos en su origen. Por ejemplo, se ordenan los datos de ventas por 'id. de cliente' antes de que se escriban en un archivo plano y se entreguen a otro departamento. Nota: no se recomienda realizar esta transformación para grandes flujos de datos."
+              version="1"
+              contactInfo="Ordenar;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1">
+              <properties>
+                <property
+                  name="EliminateDuplicates"
+                  dataType="System.Boolean"
+                  description="Indica si la transformación Ordenar quita filas con valores de ordenación duplicados.">true</property>
+                <property
+                  name="MaximumThreads"
+                  dataType="System.Int32"
+                  description="Especifica el número máximo de subprocesos que se deben usar para la ordenación."
+                  expressionType="Notify">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados.Inputs[Entrada de ordenación]"
+                  name="Entrada de ordenación">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados.Inputs[Entrada de ordenación].Columns[nNumero]"
+                      lineageId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].Columns[nNumero]"
+                      cachedName="nNumero"
+                      cachedDataType="i8">
+                      <properties>
+                        <property
+                          name="NewComparisonFlags"
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres.">0</property>
+                        <property
+                          name="NewSortKeyPosition"
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna.">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados.Inputs[Entrada de ordenación].Columns[cFormula]"
+                      lineageId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].Columns[cFormula]"
+                      cachedName="cFormula"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedCodepage="1252">
+                      <properties>
+                        <property
+                          name="NewComparisonFlags"
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres.">0</property>
+                        <property
+                          name="NewSortKeyPosition"
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna.">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados.Inputs[Entrada de ordenación].Columns[nArea]"
+                      lineageId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].Columns[nArea]"
+                      cachedName="nArea"
+                      cachedDataType="i4">
+                      <properties>
+                        <property
+                          name="NewComparisonFlags"
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres.">0</property>
+                        <property
+                          name="NewSortKeyPosition"
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna.">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados.Inputs[Entrada de ordenación].Columns[nPrefijo]"
+                      lineageId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].Columns[nPrefijo]"
+                      cachedName="nPrefijo"
+                      cachedDataType="i4">
+                      <properties>
+                        <property
+                          name="NewComparisonFlags"
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres.">0</property>
+                        <property
+                          name="NewSortKeyPosition"
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna.">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados.Inputs[Entrada de ordenación].Columns[nSerie]"
+                      lineageId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].Columns[nSerie]"
+                      cachedName="nSerie"
+                      cachedDataType="i8">
+                      <properties>
+                        <property
+                          name="NewComparisonFlags"
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres.">0</property>
+                        <property
+                          name="NewSortKeyPosition"
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna.">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados.Inputs[Entrada de ordenación].Columns[cDomain]"
+                      lineageId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].Columns[cDomain]"
+                      cachedName="cDomain"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedCodepage="1252">
+                      <properties>
+                        <property
+                          name="NewComparisonFlags"
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres.">0</property>
+                        <property
+                          name="NewSortKeyPosition"
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna.">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados.Outputs[Salida de ordenación]"
+                  name="Salida de ordenación"
+                  isSorted="true">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados.Outputs[Salida de ordenación].Columns[nNumero]"
+                      name="nNumero"
+                      lineageId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados.Outputs[Salida de ordenación].Columns[nNumero]"
+                      dataType="i8"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          name="SortColumnId"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          containsID="true">#{Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].Columns[nNumero]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados.Outputs[Salida de ordenación].Columns[cFormula]"
+                      name="cFormula"
+                      lineageId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados.Outputs[Salida de ordenación].Columns[cFormula]"
+                      length="500"
+                      dataType="str"
+                      codePage="1252">
+                      <properties>
+                        <property
+                          name="SortColumnId"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          containsID="true">#{Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].Columns[cFormula]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados.Outputs[Salida de ordenación].Columns[nArea]"
+                      name="nArea"
+                      lineageId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados.Outputs[Salida de ordenación].Columns[nArea]"
+                      dataType="i4">
+                      <properties>
+                        <property
+                          name="SortColumnId"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          containsID="true">#{Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].Columns[nArea]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados.Outputs[Salida de ordenación].Columns[nPrefijo]"
+                      name="nPrefijo"
+                      lineageId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados.Outputs[Salida de ordenación].Columns[nPrefijo]"
+                      dataType="i4">
+                      <properties>
+                        <property
+                          name="SortColumnId"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          containsID="true">#{Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].Columns[nPrefijo]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados.Outputs[Salida de ordenación].Columns[nSerie]"
+                      name="nSerie"
+                      lineageId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados.Outputs[Salida de ordenación].Columns[nSerie]"
+                      dataType="i8">
+                      <properties>
+                        <property
+                          name="SortColumnId"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          containsID="true">#{Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].Columns[nSerie]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados.Outputs[Salida de ordenación].Columns[cDomain]"
+                      name="cDomain"
+                      lineageId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados.Outputs[Salida de ordenación].Columns[cDomain]"
+                      length="500"
+                      dataType="str"
+                      codePage="1252">
+                      <properties>
+                        <property
+                          name="SortColumnId"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          containsID="true">#{Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB].Columns[cDomain]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Quitar Duplicados en BDD.Paths[Salida de ordenación]"
+              name="Salida de ordenación"
+              startId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados.Outputs[Salida de ordenación]"
+              endId="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone.Inputs[Entrada de destino de SQL Server]" />
+            <path
+              refId="Package\Quitar Duplicados en BDD.Paths[Salida de origen de OLE DB]"
+              name="Salida de origen de OLE DB"
+              startId="Package\Quitar Duplicados en BDD\Leyendo tmp.Outputs[Salida de origen de OLE DB]"
+              endId="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados.Inputs[Entrada de ordenación]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Recorrer todos los TXT's"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Recorrer todos los TXT's"
+      DTS:DTSID="{BDC08A09-983C-4C11-BC19-E352C0EAA8F1}"
+      DTS:Description="Contenedor de bucles Foreach"
+      DTS:CreationName="STOCK:FOREACHLOOP">
+      <DTS:ForEachEnumerator
+        DTS:ObjectName="{98D7580F-132A-4841-92F3-B1A8E780FDDF}"
+        DTS:DTSID="{98D7580F-132A-4841-92F3-B1A8E780FDDF}"
+        DTS:CreationName="DTS.ForEachFileEnumerator.3">
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="D:\323" />
+            <FEFEProperty
+              FileSpec="*.txt" />
+            <FEFEProperty
+              FileNameRetrievalType="0" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Recorrer todos los TXT's\Rejunte de datos"
+          DTS:ExecutableType="SSIS.Pipeline.3"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Rejunte de datos"
+          DTS:DTSID="{E7F46BC2-2303-499A-883A-2F85805B6082}"
+          DTS:Description="Tarea Flujo de datos"
+          DTS:CreationName="SSIS.Pipeline.3">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo"
+                  name="Convirtiendo"
+                  componentClassID="{62B1106C-7DB8-4EC8-ADD6-4C664DFFC54A}"
+                  description="Conversión de datos"
+                  usesDispositions="true"
+                  contactInfo="Conversión de datos;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0">
+                  <inputs>
+                    <input
+                      refId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Inputs[Entrada de conversión de datos]"
+                      name="Entrada de conversión de datos">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Inputs[Entrada de conversión de datos].Columns[area]"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Outputs[Salida de columna derivada].Columns[area]"
+                          cachedName="area"
+                          cachedDataType="wstr"
+                          cachedLength="3" />
+                        <inputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Inputs[Entrada de conversión de datos].Columns[prefijo]"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Outputs[Salida de columna derivada].Columns[prefijo]"
+                          cachedName="prefijo"
+                          cachedDataType="wstr"
+                          cachedLength="3" />
+                        <inputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Inputs[Entrada de conversión de datos].Columns[series]"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Outputs[Salida de columna derivada].Columns[series]"
+                          cachedName="series"
+                          cachedDataType="wstr"
+                          cachedLength="4" />
+                        <inputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Inputs[Entrada de conversión de datos].Columns[numero]"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Outputs[Salida de columna derivada].Columns[numero]"
+                          cachedName="numero"
+                          cachedDataType="wstr"
+                          cachedLength="10" />
+                        <inputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Inputs[Entrada de conversión de datos].Columns[cFormula]"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Leyendo Textos Planos.Outputs[Salida de origen de archivo plano].Columns[cFormula]"
+                          cachedName="cFormula"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedCodepage="1252" />
+                        <inputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Inputs[Entrada de conversión de datos].Columns[domain]"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Outputs[Salida de columna derivada].Columns[domain]"
+                          cachedName="domain"
+                          cachedDataType="wstr"
+                          cachedLength="40" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Outputs[Salida de conversión de datos]"
+                      name="Salida de conversión de datos"
+                      exclusionGroup="1"
+                      synchronousInputId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Inputs[Entrada de conversión de datos]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Outputs[Salida de conversión de datos].Columns[nArea]"
+                          name="nArea"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Outputs[Salida de conversión de datos].Columns[nArea]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          truncationRowDisposition="IgnoreFailure">
+                          <properties>
+                            <property
+                              name="SourceInputColumnLineageID"
+                              dataType="System.Int32"
+                              description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                              containsID="true">#{Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Outputs[Salida de columna derivada].Columns[area]}</property>
+                            <property
+                              name="FastParse"
+                              dataType="System.Boolean"
+                              description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional.">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Outputs[Salida de conversión de datos].Columns[nPrefijo]"
+                          name="nPrefijo"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Outputs[Salida de conversión de datos].Columns[nPrefijo]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          truncationRowDisposition="IgnoreFailure">
+                          <properties>
+                            <property
+                              name="SourceInputColumnLineageID"
+                              dataType="System.Int32"
+                              description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                              containsID="true">#{Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Outputs[Salida de columna derivada].Columns[prefijo]}</property>
+                            <property
+                              name="FastParse"
+                              dataType="System.Boolean"
+                              description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional.">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Outputs[Salida de conversión de datos].Columns[nSerie]"
+                          name="nSerie"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Outputs[Salida de conversión de datos].Columns[nSerie]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          truncationRowDisposition="IgnoreFailure">
+                          <properties>
+                            <property
+                              name="SourceInputColumnLineageID"
+                              dataType="System.Int32"
+                              description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                              containsID="true">#{Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Outputs[Salida de columna derivada].Columns[series]}</property>
+                            <property
+                              name="FastParse"
+                              dataType="System.Boolean"
+                              description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional.">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Outputs[Salida de conversión de datos].Columns[nNumero]"
+                          name="nNumero"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Outputs[Salida de conversión de datos].Columns[nNumero]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          truncationRowDisposition="IgnoreFailure">
+                          <properties>
+                            <property
+                              name="SourceInputColumnLineageID"
+                              dataType="System.Int32"
+                              description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                              containsID="true">#{Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Outputs[Salida de columna derivada].Columns[numero]}</property>
+                            <property
+                              name="FastParse"
+                              dataType="System.Boolean"
+                              description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional.">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Outputs[Salida de conversión de datos].Columns[cForm]"
+                          name="cForm"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Outputs[Salida de conversión de datos].Columns[cForm]"
+                          length="100"
+                          dataType="str"
+                          codePage="1252"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          truncationRowDisposition="IgnoreFailure">
+                          <properties>
+                            <property
+                              name="SourceInputColumnLineageID"
+                              dataType="System.Int32"
+                              description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                              containsID="true">#{Package\Recorrer todos los TXT's\Rejunte de datos\Leyendo Textos Planos.Outputs[Salida de origen de archivo plano].Columns[cFormula]}</property>
+                            <property
+                              name="FastParse"
+                              dataType="System.Boolean"
+                              description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional.">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Outputs[Salida de conversión de datos].Columns[cDomain]"
+                          name="cDomain"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Outputs[Salida de conversión de datos].Columns[cDomain]"
+                          length="50"
+                          dataType="str"
+                          codePage="1252"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          truncationRowDisposition="IgnoreFailure">
+                          <properties>
+                            <property
+                              name="SourceInputColumnLineageID"
+                              dataType="System.Int32"
+                              description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                              containsID="true">#{Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Outputs[Salida de columna derivada].Columns[domain]}</property>
+                            <property
+                              name="FastParse"
+                              dataType="System.Boolean"
+                              description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional.">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Outputs[Salida de error de conversión de datos]"
+                      name="Salida de error de conversión de datos"
+                      exclusionGroup="1"
+                      synchronousInputId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Inputs[Entrada de conversión de datos]"
+                      isErrorOut="true">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Outputs[Salida de error de conversión de datos].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Outputs[Salida de error de conversión de datos].Columns[ErrorCode]"
+                          dataType="i4"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Outputs[Salida de error de conversión de datos].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Outputs[Salida de error de conversión de datos].Columns[ErrorColumn]"
+                          dataType="i4"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas"
+                  name="Derivando culumnas"
+                  componentClassID="{49928E82-9C4E-49F0-AABE-3812B82707EC}"
+                  description="Crea nuevos valores de columna aplicando expresiones a las columnas de entrada de la transformación. Crea nuevas columnas o sobrescribe las columnas existentes. Por ejemplo, se concatenan los valores de las columnas 'nombre' y 'apellidos' para crear una columna 'nombre completo'."
+                  usesDispositions="true"
+                  contactInfo="Columna derivada;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0">
+                  <inputs>
+                    <input
+                      refId="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Inputs[Entrada de columna derivada]"
+                      name="Entrada de columna derivada"
+                      description="Entrada en la transformación Columna derivada">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Inputs[Entrada de columna derivada].Columns[cFormula]"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Leyendo Textos Planos.Outputs[Salida de origen de archivo plano].Columns[cFormula]"
+                          cachedName="cFormula"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedCodepage="1252" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Outputs[Salida de columna derivada]"
+                      name="Salida de columna derivada"
+                      description="Salida predeterminada de la transformación Columna derivada"
+                      exclusionGroup="1"
+                      synchronousInputId="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Inputs[Entrada de columna derivada]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Outputs[Salida de columna derivada].Columns[area]"
+                          name="area"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Outputs[Salida de columna derivada].Columns[area]"
+                          length="3"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Cálculo"
+                          errorRowDisposition="FailComponent"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              name="Expression"
+                              dataType="System.String"
+                              description="Expresión de columna derivada"
+                              containsID="true">[SUBSTRING](#{Package\Recorrer todos los TXT's\Rejunte de datos\Leyendo Textos Planos.Outputs[Salida de origen de archivo plano].Columns[cFormula]},1,3)</property>
+                            <property
+                              name="FriendlyExpression"
+                              dataType="System.String"
+                              description="Expresión descriptiva de columna derivada"
+                              containsID="true"
+                              expressionType="Notify">SUBSTRING(cFormula,1,3)</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Outputs[Salida de columna derivada].Columns[prefijo]"
+                          name="prefijo"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Outputs[Salida de columna derivada].Columns[prefijo]"
+                          length="3"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Cálculo"
+                          errorRowDisposition="FailComponent"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              name="Expression"
+                              dataType="System.String"
+                              description="Expresión de columna derivada"
+                              containsID="true">[SUBSTRING](#{Package\Recorrer todos los TXT's\Rejunte de datos\Leyendo Textos Planos.Outputs[Salida de origen de archivo plano].Columns[cFormula]},4,3)</property>
+                            <property
+                              name="FriendlyExpression"
+                              dataType="System.String"
+                              description="Expresión descriptiva de columna derivada"
+                              containsID="true"
+                              expressionType="Notify">SUBSTRING(cFormula,4,3)</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Outputs[Salida de columna derivada].Columns[series]"
+                          name="series"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Outputs[Salida de columna derivada].Columns[series]"
+                          length="4"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Cálculo"
+                          errorRowDisposition="FailComponent"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              name="Expression"
+                              dataType="System.String"
+                              description="Expresión de columna derivada"
+                              containsID="true">[SUBSTRING](#{Package\Recorrer todos los TXT's\Rejunte de datos\Leyendo Textos Planos.Outputs[Salida de origen de archivo plano].Columns[cFormula]},7,4)</property>
+                            <property
+                              name="FriendlyExpression"
+                              dataType="System.String"
+                              description="Expresión descriptiva de columna derivada"
+                              containsID="true"
+                              expressionType="Notify">SUBSTRING(cFormula,7,4)</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Outputs[Salida de columna derivada].Columns[domain]"
+                          name="domain"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Outputs[Salida de columna derivada].Columns[domain]"
+                          length="40"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Cálculo"
+                          errorRowDisposition="FailComponent"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              name="Expression"
+                              dataType="System.String"
+                              description="Expresión de columna derivada"
+                              containsID="true">[REPLACE]([SUBSTRING](#{Package\Recorrer todos los TXT's\Rejunte de datos\Leyendo Textos Planos.Outputs[Salida de origen de archivo plano].Columns[cFormula]},11,[LEN](#{Package\Recorrer todos los TXT's\Rejunte de datos\Leyendo Textos Planos.Outputs[Salida de origen de archivo plano].Columns[cFormula]}) - 10)," ","")</property>
+                            <property
+                              name="FriendlyExpression"
+                              dataType="System.String"
+                              description="Expresión descriptiva de columna derivada"
+                              containsID="true"
+                              expressionType="Notify">REPLACE(SUBSTRING(cFormula,11,LEN(cFormula) - 10)," ","")</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Outputs[Salida de columna derivada].Columns[numero]"
+                          name="numero"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Outputs[Salida de columna derivada].Columns[numero]"
+                          length="10"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Cálculo"
+                          errorRowDisposition="FailComponent"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              name="Expression"
+                              dataType="System.String"
+                              description="Expresión de columna derivada"
+                              containsID="true">[SUBSTRING](#{Package\Recorrer todos los TXT's\Rejunte de datos\Leyendo Textos Planos.Outputs[Salida de origen de archivo plano].Columns[cFormula]},1,10)</property>
+                            <property
+                              name="FriendlyExpression"
+                              dataType="System.String"
+                              description="Expresión descriptiva de columna derivada"
+                              containsID="true"
+                              expressionType="Notify">SUBSTRING(cFormula,1,10)</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Outputs[Salida de error de columna derivada]"
+                      name="Salida de error de columna derivada"
+                      description="Salida de error de la transformación Columna derivada"
+                      exclusionGroup="1"
+                      synchronousInputId="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Inputs[Entrada de columna derivada]"
+                      isErrorOut="true">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Outputs[Salida de error de columna derivada].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Outputs[Salida de error de columna derivada].Columns[ErrorCode]"
+                          dataType="i4"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Outputs[Salida de error de columna derivada].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Outputs[Salida de error de columna derivada].Columns[ErrorColumn]"
+                          dataType="i4"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Recorrer todos los TXT's\Rejunte de datos\Escribiendo en tmp"
+                  name="Escribiendo en tmp"
+                  componentClassID="{F452EAF3-5EF0-43F1-8067-09DDF0BC6316}"
+                  description="Destino de SQL Server"
+                  version="5"
+                  contactInfo="Destino de SQL Server;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;5">
+                  <properties>
+                    <property
+                      name="DefaultCodePage"
+                      dataType="System.Int32"
+                      description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos.">1252</property>
+                    <property
+                      name="AlwaysUseDefaultCodePage"
+                      dataType="System.Boolean"
+                      description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir caracteres.">false</property>
+                    <property
+                      name="BulkInsertTableName"
+                      dataType="System.String"
+                      description="El nombre del objeto de base de datos en el que copiar datos."
+                      expressionType="Notify">[dbo].[tmp]</property>
+                    <property
+                      name="BulkInsertCheckConstraints"
+                      dataType="System.Boolean"
+                      description="Especifica que todas las restricciones del objeto de destino se comprueben durante la operación de copia de datos. Corresponde a la opción CHECK_CONSTRAINTS de inserción masiva.">false</property>
+                    <property
+                      name="BulkInsertFirstRow"
+                      dataType="System.Int32"
+                      description="Especifica el número de la primera fila para copiar. Corresponde a la opción FIRSTROW de inserción masiva."
+                      expressionType="Notify">-1</property>
+                    <property
+                      name="BulkInsertFireTriggers"
+                      dataType="System.Boolean"
+                      description="Especifica que todos los desencadenadores de inserción definidos en el objeto de destino se van a ejecutar durante la copia de datos. Corresponde a la opción FIRE_TRIGGERS de inserción masiva.">false</property>
+                    <property
+                      name="BulkInsertKeepIdentity"
+                      dataType="System.Boolean"
+                      description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Corresponde a la opción KEEPIDENTITY de inserción masiva.">false</property>
+                    <property
+                      name="BulkInsertKeepNulls"
+                      dataType="System.Boolean"
+                      description="Indica si las columnas que contienen NULL tendrán NULL copiado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Sólo se aplica si está activada la carga rápida.">true</property>
+                    <property
+                      name="BulkInsertLastRow"
+                      dataType="System.Int32"
+                      description="Especifica el número de la última fila para copiar. Corresponde a la opción LASTROW de inserción masiva."
+                      expressionType="Notify">-1</property>
+                    <property
+                      name="BulkInsertMaxErrors"
+                      dataType="System.Int32"
+                      description="Especifica el número máximo de errores de sintaxis y de compilación que pueden producirse sin que se cancele la operación de copia. Cada fila que no se puede copiar se omite y se cuenta como un error. Corresponde a la opción MAXERRORS de inserción masiva.">-1</property>
+                    <property
+                      name="BulkInsertOrder"
+                      dataType="System.String"
+                      description="Especifica cómo se ordenan los datos que se van a copiar. Corresponde a la opción ORDER de inserción masiva."
+                      expressionType="Notify"></property>
+                    <property
+                      name="BulkInsertTablock"
+                      dataType="System.Boolean"
+                      description="Especifica que se adquiere un bloqueo de nivel de tabla durante toda la operación de copia de datos. Corresponde a la opción TABLOCK de inserción masiva.">true</property>
+                    <property
+                      name="Timeout"
+                      dataType="System.Int32"
+                      description="Especifica en segundos el tiempo de espera del adaptador de destino de SQL antes de desactivarse si no hay ningún dato disponible para la inserción. Un valor 0 de tiempo de espera indica que no se agotará el tiempo de espera del adaptador de destino de SQL."
+                      expressionType="Notify">30</property>
+                    <property
+                      name="MaxInsertCommitSize"
+                      dataType="System.Int32"
+                      description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos.">0</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Recorrer todos los TXT's\Rejunte de datos\Escribiendo en tmp.Connections[OleDbConnection]"
+                      name="OleDbConnection"
+                      description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                      connectionManagerID="Package.ConnectionManagers[SERVER.USA.sa]"
+                      connectionManagerRefId="Package.ConnectionManagers[SERVER.USA.sa]" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Recorrer todos los TXT's\Rejunte de datos\Escribiendo en tmp.Inputs[Entrada de destino de SQL Server]"
+                      name="Entrada de destino de SQL Server"
+                      hasSideEffects="true">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Escribiendo en tmp.Inputs[Entrada de destino de SQL Server].Columns[nArea]"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Outputs[Salida de conversión de datos].Columns[nArea]"
+                          externalMetadataColumnId="Package\Recorrer todos los TXT's\Rejunte de datos\Escribiendo en tmp.Inputs[Entrada de destino de SQL Server].ExternalColumns[nArea]"
+                          cachedName="nArea"
+                          cachedDataType="i4" />
+                        <inputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Escribiendo en tmp.Inputs[Entrada de destino de SQL Server].Columns[nPrefijo]"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Outputs[Salida de conversión de datos].Columns[nPrefijo]"
+                          externalMetadataColumnId="Package\Recorrer todos los TXT's\Rejunte de datos\Escribiendo en tmp.Inputs[Entrada de destino de SQL Server].ExternalColumns[nPrefijo]"
+                          cachedName="nPrefijo"
+                          cachedDataType="i4" />
+                        <inputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Escribiendo en tmp.Inputs[Entrada de destino de SQL Server].Columns[nSerie]"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Outputs[Salida de conversión de datos].Columns[nSerie]"
+                          externalMetadataColumnId="Package\Recorrer todos los TXT's\Rejunte de datos\Escribiendo en tmp.Inputs[Entrada de destino de SQL Server].ExternalColumns[nSerie]"
+                          cachedName="nSerie"
+                          cachedDataType="i8" />
+                        <inputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Escribiendo en tmp.Inputs[Entrada de destino de SQL Server].Columns[nNumero]"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Outputs[Salida de conversión de datos].Columns[nNumero]"
+                          externalMetadataColumnId="Package\Recorrer todos los TXT's\Rejunte de datos\Escribiendo en tmp.Inputs[Entrada de destino de SQL Server].ExternalColumns[nNumero]"
+                          cachedName="nNumero"
+                          cachedDataType="i8" />
+                        <inputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Escribiendo en tmp.Inputs[Entrada de destino de SQL Server].Columns[cDomain]"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Outputs[Salida de conversión de datos].Columns[cDomain]"
+                          externalMetadataColumnId="Package\Recorrer todos los TXT's\Rejunte de datos\Escribiendo en tmp.Inputs[Entrada de destino de SQL Server].ExternalColumns[cDomain]"
+                          cachedName="cDomain"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedCodepage="1252" />
+                        <inputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Escribiendo en tmp.Inputs[Entrada de destino de SQL Server].Columns[cForm]"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Outputs[Salida de conversión de datos].Columns[cForm]"
+                          externalMetadataColumnId="Package\Recorrer todos los TXT's\Rejunte de datos\Escribiendo en tmp.Inputs[Entrada de destino de SQL Server].ExternalColumns[cFormula]"
+                          cachedName="cForm"
+                          cachedDataType="str"
+                          cachedLength="100"
+                          cachedCodepage="1252" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Escribiendo en tmp.Inputs[Entrada de destino de SQL Server].ExternalColumns[cFormula]"
+                          name="cFormula"
+                          dataType="str"
+                          length="100"
+                          codePage="1252" />
+                        <externalMetadataColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Escribiendo en tmp.Inputs[Entrada de destino de SQL Server].ExternalColumns[nArea]"
+                          name="nArea"
+                          dataType="i4" />
+                        <externalMetadataColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Escribiendo en tmp.Inputs[Entrada de destino de SQL Server].ExternalColumns[nPrefijo]"
+                          name="nPrefijo"
+                          dataType="i4" />
+                        <externalMetadataColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Escribiendo en tmp.Inputs[Entrada de destino de SQL Server].ExternalColumns[nSerie]"
+                          name="nSerie"
+                          dataType="i8" />
+                        <externalMetadataColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Escribiendo en tmp.Inputs[Entrada de destino de SQL Server].ExternalColumns[nNumero]"
+                          name="nNumero"
+                          dataType="i8" />
+                        <externalMetadataColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Escribiendo en tmp.Inputs[Entrada de destino de SQL Server].ExternalColumns[cDomain]"
+                          name="cDomain"
+                          dataType="str"
+                          length="50"
+                          codePage="1252" />
+                        <externalMetadataColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Escribiendo en tmp.Inputs[Entrada de destino de SQL Server].ExternalColumns[id]"
+                          name="id"
+                          dataType="i8" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                </component>
+                <component
+                  refId="Package\Recorrer todos los TXT's\Rejunte de datos\Leyendo Textos Planos"
+                  name="Leyendo Textos Planos"
+                  componentClassID="{D23FD76B-F51D-420F-BBCB-19CBF6AC1AB4}"
+                  description="Origen de archivo plano"
+                  localeId="3082"
+                  usesDispositions="true"
+                  version="1"
+                  contactInfo="Origen de archivo plano;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1">
+                  <properties>
+                    <property
+                      name="RetainNulls"
+                      dataType="System.Boolean"
+                      description="Especifica si las columnas de longitud cero se tratan como NULL.">false</property>
+                    <property
+                      name="FileNameColumnName"
+                      dataType="System.String"
+                      description="Especifica el nombre de una columna de salida que contiene el nombre de archivo. Si no se especifica ningún nombre, no se genera ninguna columna de salida con el nombre de archivo."></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Recorrer todos los TXT's\Rejunte de datos\Leyendo Textos Planos.Connections[FlatFileConnection]"
+                      name="FlatFileConnection"
+                      connectionManagerID="Package.ConnectionManagers[xxx]"
+                      connectionManagerRefId="Package.ConnectionManagers[xxx]" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Recorrer todos los TXT's\Rejunte de datos\Leyendo Textos Planos.Outputs[Salida de origen de archivo plano]"
+                      name="Salida de origen de archivo plano">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Leyendo Textos Planos.Outputs[Salida de origen de archivo plano].Columns[cFormula]"
+                          name="cFormula"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Leyendo Textos Planos.Outputs[Salida de origen de archivo plano].Columns[cFormula]"
+                          length="50"
+                          dataType="str"
+                          codePage="1252"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          truncationRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Recorrer todos los TXT's\Rejunte de datos\Leyendo Textos Planos.Outputs[Salida de origen de archivo plano].ExternalColumns[Columna 0]">
+                          <properties>
+                            <property
+                              name="FastParse"
+                              dataType="System.Boolean"
+                              description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional.">false</property>
+                            <property
+                              name="UseBinaryFormat"
+                              dataType="System.Boolean"
+                              description="Indica si los datos están en formato binario.">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Leyendo Textos Planos.Outputs[Salida de origen de archivo plano].ExternalColumns[Columna 0]"
+                          name="Columna 0"
+                          dataType="str"
+                          length="50"
+                          codePage="1252" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Recorrer todos los TXT's\Rejunte de datos\Leyendo Textos Planos.Outputs[Salida de error de origen de archivo plano]"
+                      name="Salida de error de origen de archivo plano"
+                      isErrorOut="true">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Leyendo Textos Planos.Outputs[Salida de error de origen de archivo plano].Columns[Columna de salida de error de origen de archivo plano]"
+                          name="Columna de salida de error de origen de archivo plano"
+                          description="Columna de salida de error de origen de archivo plano"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Leyendo Textos Planos.Outputs[Salida de error de origen de archivo plano].Columns[Columna de salida de error de origen de archivo plano]"
+                          dataType="text"
+                          codePage="1252" />
+                        <outputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Leyendo Textos Planos.Outputs[Salida de error de origen de archivo plano].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Leyendo Textos Planos.Outputs[Salida de error de origen de archivo plano].Columns[ErrorCode]"
+                          dataType="i4"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Recorrer todos los TXT's\Rejunte de datos\Leyendo Textos Planos.Outputs[Salida de error de origen de archivo plano].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          lineageId="Package\Recorrer todos los TXT's\Rejunte de datos\Leyendo Textos Planos.Outputs[Salida de error de origen de archivo plano].Columns[ErrorColumn]"
+                          dataType="i4"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Recorrer todos los TXT's\Rejunte de datos.Paths[Salida de columna derivada]"
+                  name="Salida de columna derivada"
+                  startId="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Outputs[Salida de columna derivada]"
+                  endId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Inputs[Entrada de conversión de datos]" />
+                <path
+                  refId="Package\Recorrer todos los TXT's\Rejunte de datos.Paths[Salida de conversión de datos]"
+                  name="Salida de conversión de datos"
+                  startId="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo.Outputs[Salida de conversión de datos]"
+                  endId="Package\Recorrer todos los TXT's\Rejunte de datos\Escribiendo en tmp.Inputs[Entrada de destino de SQL Server]" />
+                <path
+                  refId="Package\Recorrer todos los TXT's\Rejunte de datos.Paths[Salida de origen de archivo plano]"
+                  name="Salida de origen de archivo plano"
+                  startId="Package\Recorrer todos los TXT's\Rejunte de datos\Leyendo Textos Planos.Outputs[Salida de origen de archivo plano]"
+                  endId="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas.Inputs[Entrada de columna derivada]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:VariableName="User::varFileName"
+          DTS:ValueIndex="0"
+          DTS:ObjectName="{FC2542DB-4BAF-401F-8FEA-D8FEA0C8A5B8}"
+          DTS:DTSID="{FC2542DB-4BAF-401F-8FEA-D8FEA0C8A5B8}"
+          DTS:CreationName="" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción]"
+      DTS:From="Package\Limpiar tabla temporal"
+      DTS:To="Package\Recorrer todos los TXT's"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción"
+      DTS:DTSID="{EE403772-1D45-4CFE-8493-7FD8DFD93FD1}"
+      DTS:CreationName="" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 1]"
+      DTS:From="Package\Recorrer todos los TXT's"
+      DTS:To="Package\Quitar Duplicados en BDD"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 1"
+      DTS:DTSID="{3627B9B6-2C58-4C67-8614-E2673741737A}"
+      DTS:CreationName="" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="sql11">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="186,42"
+          Id="Package\Limpiar tabla temporal"
+          TopLeft="106,48" />
+        <NodeLayout
+          Size="202,42"
+          Id="Package\Quitar Duplicados en BDD"
+          TopLeft="497,264" />
+        <NodeLayout
+          Size="160,42"
+          Id="Package\Recorrer todos los TXT's\Rejunte de datos"
+          TopLeft="39,71" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="261,184"
+          Size="261,227"
+          Id="Package\Recorrer todos los TXT's"
+          TopLeft="65,177" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción]"
+          TopLeft="197.25,90">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,87"
+              Start="0,0"
+              End="0,79.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,79.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 1]"
+          TopLeft="326,287.75">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="171,0"
+              Start="0,0"
+              End="163.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="163.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Quitar Duplicados en BDD">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="238,42"
+          Id="Package\Quitar Duplicados en BDD\Ordenando y quitando duplicados"
+          TopLeft="132,167" />
+        <NodeLayout
+          Size="246,47"
+          Id="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone"
+          TopLeft="114,292" />
+        <NodeLayout
+          Size="141,42"
+          Id="Package\Quitar Duplicados en BDD\Leyendo tmp"
+          TopLeft="97,46" />
+        <EdgeLayout
+          Id="Package\Quitar Duplicados en BDD.Paths[Salida de ordenación]"
+          TopLeft="251,209">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-14,83"
+              Start="0,0"
+              End="-14,75.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,37.5"
+                    Point2="0,41.5"
+                    Point3="-4,41.5" />
+                  <mssgle:LineSegment
+                    End="-10,41.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-10,41.5"
+                    Point2="-14,41.5"
+                    Point3="-14,45.5" />
+                  <mssgle:LineSegment
+                    End="-14,75.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Quitar Duplicados en BDD.Paths[Salida de origen de OLE DB]"
+          TopLeft="167.5,88">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="83.5,79"
+              Start="0,0"
+              End="83.5,71.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,35.5"
+                    Point2="0,39.5"
+                    Point3="4,39.5" />
+                  <mssgle:LineSegment
+                    End="79.5,39.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="79.5,39.5"
+                    Point2="83.5,39.5"
+                    Point3="83.5,43.5" />
+                  <mssgle:LineSegment
+                    End="83.5,71.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Quitar Duplicados en BDD\Escribiendo en tblPhone">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Quitar Duplicados en BDD\Leyendo tmp">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Recorrer todos los TXT's\Rejunte de datos">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="188,42"
+          Id="Package\Recorrer todos los TXT's\Rejunte de datos\Leyendo Textos Planos"
+          TopLeft="153,39" />
+        <NodeLayout
+          Size="170,42"
+          Id="Package\Recorrer todos los TXT's\Rejunte de datos\Escribiendo en tmp"
+          TopLeft="131,467" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Recorrer todos los TXT's\Rejunte de datos\Derivando culumnas"
+          TopLeft="136,236" />
+        <NodeLayout
+          Size="139,42"
+          Id="Package\Recorrer todos los TXT's\Rejunte de datos\Convirtiendo"
+          TopLeft="135,334" />
+        <EdgeLayout
+          Id="Package\Recorrer todos los TXT's\Rejunte de datos.Paths[Salida de conversión de datos]"
+          TopLeft="204.5,376">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="11.5,91"
+              Start="0,0"
+              End="11.5,83.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,41.5"
+                    Point2="0,45.5"
+                    Point3="4,45.5" />
+                  <mssgle:LineSegment
+                    End="7.5,45.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="7.5,45.5"
+                    Point2="11.5,45.5"
+                    Point3="11.5,49.5" />
+                  <mssgle:LineSegment
+                    End="11.5,83.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Recorrer todos los TXT's\Rejunte de datos.Paths[Salida de columna derivada]"
+          TopLeft="224,278">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-19.5,56"
+              Start="0,0"
+              End="-19.5,48.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24"
+                    Point2="0,28"
+                    Point3="-4,28" />
+                  <mssgle:LineSegment
+                    End="-15.5,28" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-15.5,28"
+                    Point2="-19.5,28"
+                    Point3="-19.5,32" />
+                  <mssgle:LineSegment
+                    End="-19.5,48.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Recorrer todos los TXT's\Rejunte de datos.Paths[Salida de origen de archivo plano]"
+          TopLeft="247,81">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-23,155"
+              Start="0,0"
+              End="-23,147.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,73.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,73.5"
+                    Point2="0,77.5"
+                    Point3="-4,77.5" />
+                  <mssgle:LineSegment
+                    End="-19,77.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-19,77.5"
+                    Point2="-23,77.5"
+                    Point3="-23,81.5" />
+                  <mssgle:LineSegment
+                    End="-23,147.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Recorrer todos los TXT's\Rejunte de datos\Escribiendo en tmp">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
